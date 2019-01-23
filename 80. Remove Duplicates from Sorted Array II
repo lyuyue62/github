@@ -1,0 +1,42 @@
+//version1 : mine
+//fail to revise input.
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length < 2)
+            return nums.length;
+        int length = nums.length;
+        int[] tmp = new int[length];
+        
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        
+        for (int i = 0; i < length; i++){
+            if(map.containsKey(nums[i])){
+                map.put(nums[i], map.get(nums[i]) + 1);
+                if(map.get(nums[i]) > 2){
+                    length --;
+                }
+            }else{
+                map.put(nums[i], 1);
+            }
+        }
+        
+        return length;
+        
+    }
+}
+.....
+
+//version 2
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length < 2)
+            return nums.length;
+        int index = 2;
+        for(int i = 2; i < nums.length; i ++)
+        {
+            if(nums[i] != nums[index-2])
+                nums[index ++] = nums[i];
+        }
+        return index;
+    }
+}
