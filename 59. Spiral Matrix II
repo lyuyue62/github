@@ -35,3 +35,5 @@ class Solution {
         return res;
     }
 }
+
+//顺着思路来
