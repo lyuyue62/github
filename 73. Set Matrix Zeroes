@@ -1,0 +1,38 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        
+        boolean[] flag_x = new boolean[n];
+        boolean[] flag_y = new boolean[m];
+        
+        for(int i = 0; i < n ; i ++){
+            for(int j = 0; j < m; j++){
+                if(matrix[i][j] == 0){
+                    flag_x[i] = true;
+                    flag_y[j] = true;
+                }
+            }
+        }
+        
+        
+        for(int i = 0; i < n; i++ ){
+            if(flag_x[i] == true)
+                for (int j = 0; j < m; j++) {
+                    matrix[i][j] = 0;
+                }
+        }
+        
+        for(int i = 0; i < m; i++ ){
+            if(flag_y[i] == true)
+                for (int j = 0; j < n; j++) {
+                    matrix[j][i] = 0;
+                }
+        }
+        
+        
+    }
+}
+
+//true
+//check return type
