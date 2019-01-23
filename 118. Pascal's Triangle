@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if (numRows == 0)
+            return res;
+        
+        List<Integer> pre = new ArrayList<Integer>();
+        pre.add(1);
+        res.add(pre);
+        if (numRows == 1)
+            return res;
+        
+        
+        
+        for(int n = 1 ; n < numRows; n++){
+            List<Integer> tmp = new ArrayList<Integer>();
+            tmp.add(1);
+            for(int i = 1; i < n; i++){
+                tmp.add(pre.get(i-1) + pre.get(i));
+            }
+            tmp.add(1);
+            res.add(tmp);
+            pre = tmp;
+        }
+        
+        return res;
+    }
+}
