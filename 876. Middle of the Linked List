@@ -1,0 +1,38 @@
+//mine
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        if(head.next == null || head == null)
+            return head;
+        
+        int len = length(head);
+        ListNode pre,cur;
+        pre = head;
+        cur = head;
+        
+        
+        for(int i = 0; i < Math.ceil(len/2) -1; i++){
+            
+            cur = cur.next; 
+            
+        }
+        
+        while(cur.next != null){
+            cur = cur.next;
+            pre = pre.next;
+        }
+        
+        return pre;
+        
+    }
+    
+    private int length(ListNode head){
+        
+        int len = 1;
+        while(head != null){
+            head = head.next;
+            len ++;
+        }
+        return len;
+        
+    }
+}
