@@ -1,0 +1,82 @@
+//version1 failed..
+
+class Solution {
+    public int search(int[] nums, int target) {
+        if(nums.length == 0)
+            return -1;
+        
+        int start = 0;
+        int end = nums.length -1 ;
+        int mid = (start + end) / 2;
+        
+        while(start <= end){
+            if(nums[mid] == target)
+                return mid;
+            
+            if(nums[mid] < target){
+                if(nums[mid] < nums[end])
+                    start = mid + 1;
+                if(nums[mid] > nums[end]){
+                    if(nums[end] < target)
+                        end = mid - 1;
+                    if(nums[end] > target)
+                        start = mid + 1;
+                }
+            }
+            
+            if(nums[mid] > target){
+                if(nums[mid] < nums[end])
+                    end = mid - 1;
+                if(nums[mid] > nums[end]){
+                    if(nums[start] > target)
+                        start = mid + 1;
+                    if(nums[start] < target)
+                        end = mid - 1;
+                }
+            }
+                
+            mid = (start + end) /2;
+            
+        }
+        return -1;
+    }
+}
+
+
+
+//version 2.not mine..
+class Solution {
+    public int search(int[] nums, int target) {
+        if(nums.length == 0)
+            return -1;
+        
+        int left = 0;
+        int right = nums.length -1 ;
+        int mid = (left + right) / 2;
+        
+        while(left <= right){
+            if(nums[mid] == target)
+                return mid;
+            
+            if(nums[mid] < target){
+                if (nums[right] >= nums[mid] && nums[right] < target) { 
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            
+            if(nums[mid] > target){
+                if (nums[left] <= nums[mid] && nums[left] > target) { 
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+                
+            mid = (left + right) / 2;
+            
+        }
+        return -1;
+    }
+}
