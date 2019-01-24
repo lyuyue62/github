@@ -80,3 +80,8 @@ class Solution {
         return -1;
     }
 }
+
+好好梳理思路后再写，不要分太多情况，不如把特殊情况写出来
+
+                return mid;思路
+                return mid;
