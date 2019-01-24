@@ -1,0 +1,75 @@
+// version1: mine, can only works on small dataset.
+//Time Limited..
+
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        
+        if(head == null || head.next == null)
+            return head;
+        
+        ListNode dummy = new ListNode(Integer.MAX_VALUE);
+        dummy.next = head;
+        
+        ListNode cur = new ListNode(0);
+        cur = head;
+        
+        ListNode pre = new ListNode(0);
+        pre = dummy;
+        
+        ListNode flag = new ListNode(0);
+        flag = head;
+        
+        
+        while(flag != null){
+            while(head != flag){
+                if(head.val > flag.val){
+                    while(head.next != cur)
+                        head = head.next;
+                    head.next = cur.next;
+                    cur.next = pre.next;
+                    pre.next = cur;
+                    break;
+                }
+                head = head.next;
+                pre = pre.next;
+            }
+            head = dummy.next;
+            pre = dummy;
+            flag = flag.next;
+            cur = flag;
+        }
+        
+        return dummy.next;
+    }
+}
+
+//version2
+//寻找更简洁的条件和更少的变量
+class Solution {
+    public ListNode insertionSortList(ListNode ptr) {    
+        if (ptr == null || ptr.next == null)
+            return ptr;
+        
+        ListNode preInsert, toInsert, dummyHead = new ListNode(0);
+        dummyHead.next = ptr;
+
+        while (ptr != null && ptr.next != null) {
+            if (ptr.val <= ptr.next.val) {
+                ptr = ptr.next;
+            } else {      
+                toInsert = ptr.next;
+                // Locate preInsert.
+                preInsert = dummyHead;
+                while (preInsert.next.val < toInsert.val) {
+                    preInsert = preInsert.next;
+                }
+                ptr.next = toInsert.next;
+                // Insert toInsert after preInsert.
+                toInsert.next = preInsert.next;
+                preInsert.next = toInsert;
+            }
+        }
+        
+        return dummyHead.next;
+    }
+}
