@@ -1,4 +1,5 @@
 //not mine.有正确的思路写不对。。。
+//建立（利用现有的node）两个新的list 最后连在一起
 class Solution {
     public ListNode partition(ListNode head, int x) {
         if(head == null)
