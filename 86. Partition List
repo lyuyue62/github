@@ -26,7 +26,7 @@ class Solution {
             head = head.next;
         }
         less.next = dum2.next;
-        more.next = null;
+        more.next = null;//关键一步 新list的最后必须是null结尾
         
         return dum1.next;
     }
