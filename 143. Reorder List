@@ -1,0 +1,104 @@
+// version1 failed..试图每次找最后一个数插入到合适的点
+class Solution {
+    public void reorderList(ListNode head) {
+        if(head.next == null || head == null)
+            return;
+        
+        ListNode pre_Ins = new ListNode(0);
+        pre_Ins.next = null;
+        ListNode to_Ins = head;
+        
+        ListNode cur = to_Ins;
+        ListNode pre = pre_Ins;
+        
+        while( to_Ins.next != null){
+            pre_Ins = to_Ins;
+            to_Ins = to_Ins.next;
+            
+            cur = to_Ins;
+            pre = pre_Ins;
+            
+            if(to_Ins.next == null)
+                return;
+            
+            while(cur.next != null)
+                cur = cur.next;
+                pre = pre.next;
+            
+            pre.next = null;
+         
+            pre_Ins.next = cur;
+            cur.next = to_Ins;  
+        }
+        
+        return;
+    }
+}
+
+//while(node != null) : node 在队尾会被执行
+//while(node.next != null) node在队尾的时候不会被执行
+//version 2 
+class Solution {
+    public void reorderList(ListNode head) {
+      // step 1. cut the list to two halves
+      // prev will be the tail of 1st half
+      // slow will be the head of 2nd half
+      if (head == null || head.next == null)
+          return;
+        
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
+        ListNode list1 = head;
+
+        
+        while(fast != null && fast.next != null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        
+        prev.next = null;
+        
+        // step 2. reverse the 2nd half
+        ListNode list2 = reverse(slow);
+        
+        // step 3. merge the two halves
+        merge(list1, list2);
+        
+    }
+    
+    void merge(ListNode l1, ListNode l2) {
+      while (l1 != null) {
+        ListNode n1 = l1.next, n2 = l2.next;
+        l1.next = l2;
+        
+        if (n1 == null)
+          break;
+            
+        l2.next = n1;
+        l1 = n1;
+        l2 = n2;
+      }
+    }
+    
+    private ListNode reverse(ListNode head){
+        
+        ListNode cur = head;
+        ListNode pre = null;
+        ListNode next = null;
+        
+        while(cur != null){
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        
+        return pre;
+    }
+    
+    
+    
+}
+ 
