@@ -1,0 +1,32 @@
+//not mine.有正确的思路写不对。。。
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        if(head == null)
+            return head;
+        
+        ListNode less = new ListNode(0);
+        ListNode more = new ListNode(0);
+    
+        ListNode dum1 = less;
+        ListNode dum2 = more;
+       
+        
+        while(head != null){
+            
+            if(head.val < x){
+                less.next = head;
+                less = head;
+            }
+            else{
+                more.next = head;
+                more = head;
+            }
+            
+            head = head.next;
+        }
+        less.next = dum2.next;
+        more.next = null;
+        
+        return dum1.next;
+    }
+}
